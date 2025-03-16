@@ -1,16 +1,38 @@
-import { NextApiRequest, NextApiResponse } from "next";
-
-export default function allowCors(handler: any) {
-  return async (req: NextApiRequest, res: NextApiResponse) => {
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-    if (req.method === "OPTIONS") {
-      return res.status(200).end();
+import { NextRequest, NextResponse } from 'next/server'
+ 
+const allowedOrigins = ['medyanes-task.vercel.app', 'http://localhost:3000']
+ 
+const corsOptions = {
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+}
+ 
+export function middleware(request: NextRequest) {
+  const origin = request.headers.get('origin') ?? ''
+  const isAllowedOrigin = allowedOrigins.includes(origin)
+  const isPreflight = request.method === 'OPTIONS'
+ 
+  if (isPreflight) {
+    const preflightHeaders = {
+      ...(isAllowedOrigin && { 'Access-Control-Allow-Origin': origin }),
+      ...corsOptions,
     }
-
-    return handler(req, res);
-  };
+    return NextResponse.json({}, { headers: preflightHeaders })
+  }
+ 
+  const response = NextResponse.next()
+ 
+  if (isAllowedOrigin) {
+    response.headers.set('Access-Control-Allow-Origin', origin)
+  }
+ 
+  Object.entries(corsOptions).forEach(([key, value]) => {
+    response.headers.set(key, value)
+  })
+ 
+  return response
+}
+ 
+export const config = {
+  matcher: '/api/:path*',
 }
