@@ -9,7 +9,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
     }
-
     if(req.method === 'GET'){
         try {
             const data = await getAllData("listElements");
