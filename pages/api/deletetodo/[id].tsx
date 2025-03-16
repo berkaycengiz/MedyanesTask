@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { deleteDataByAny } from "@/services/serviceOperations"; // Veriyi silmek için fonksiyonu import ettik
+import { deleteDataByAny } from "@/services/serviceOperations";
+import allowCors from '../middleware';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
@@ -29,4 +30,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default handler;
+export default allowCors(handler);

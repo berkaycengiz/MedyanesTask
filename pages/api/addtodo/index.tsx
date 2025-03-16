@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import {createNewData} from "@/services/serviceOperations";
-
+import allowCors from "../middleware";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     
     if(req.method === 'POST'){
@@ -29,4 +29,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 }
 
-export default handler;
+export default allowCors(handler);
