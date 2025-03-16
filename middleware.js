@@ -7,7 +7,7 @@ const corsOptions = {
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 }
  
-export function middleware(request: NextRequest) {
+export function middleware(request) {
   const origin = request.headers.get('origin') ?? ''
   const isAllowedOrigin = allowedOrigins.includes(origin)
   const isPreflight = request.method === 'OPTIONS'
