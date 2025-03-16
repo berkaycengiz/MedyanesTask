@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import {getAllData} from "@/services/serviceOperations";
-import allowCors from '../middleware';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
@@ -18,4 +17,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
     }
 }
-export default allowCors(handler);
+export default handler;
