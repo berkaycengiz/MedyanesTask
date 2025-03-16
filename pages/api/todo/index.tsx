@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import {getAllData, createNewData} from "@/services/serviceOperations";
+import {getAllData} from "@/services/serviceOperations";
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {

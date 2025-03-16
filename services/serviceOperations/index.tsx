@@ -5,7 +5,7 @@ export async function createNewData(tableName: string, content: string) {
   try {
     const data = await (prisma as any)[tableName].create({ 
       data: {
-        content 
+        content
       }
     });
     return data;

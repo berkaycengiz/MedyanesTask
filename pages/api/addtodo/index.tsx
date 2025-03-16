@@ -6,7 +6,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method === 'POST'){
         try {
 
-            const body =await req.body;
+            const body = await req.body;
             if(!body){
                 throw new Error("Bir hata olustu!");
             }
