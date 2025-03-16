@@ -2,13 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { deleteDataByAny } from "@/services/serviceOperations"; // Veriyi silmek için fonksiyonu import ettik
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  if (req.method === 'OPTIONS') {
-      return res.status(200).end();
-  }
 
   const { id } = req.query;
 
